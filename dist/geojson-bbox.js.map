@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "sources": [
+    "node_modules/browserify/node_modules/browser-pack/_prelude.js",
+    "geojson-bbox.js"
+  ],
+  "names": [],
+  "mappings": "AAAA;ACAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+  "file": "generated.js",
+  "sourceRoot": "",
+  "sourcesContent": [
+    "(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require==\"function\"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error(\"Cannot find module '\"+o+\"'\");throw f.code=\"MODULE_NOT_FOUND\",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require==\"function\"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})",
+    "module.exports = function(gj) {\n  var coords, bbox;\n  if (!gj.hasOwnProperty('type')) return;\n  coords = getCoordinatesDump(gj);\n  bbox = [ Number.POSITIVE_INFINITY,Number.POSITIVE_INFINITY,\n      Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY,];\n  return coords.reduce(function(prev,coord) {\n    return [\n      Math.min(coord[0], prev[0]),\n      Math.min(coord[1], prev[1]),\n      Math.max(coord[0], prev[2]),\n      Math.max(coord[1], prev[3])\n    ];\n  }, bbox);\n};\n\nfunction getCoordinatesDump(gj) {\n  var coords;\n  if (gj.type == 'Point') {\n    coords = [gj.coordinates];\n  } else if (gj.type == 'LineString' || gj.type == 'MultiPoint') {\n    coords = gj.coordinates;\n  } else if (gj.type == 'Polygon' || gj.type == 'MultiLineString') {\n    coords = gj.coordinates.reduce(function(dump,part) {\n      return dump.concat(part);\n    }, []);\n  } else if (gj.type == 'MultiPolygon') {\n    coords = gj.coordinates.reduce(function(dump,poly) {\n      return dump.concat(poly.reduce(function(points,part) {\n        return points.concat(part);\n      },[]));\n    },[]);\n  } else if (gj.type == 'Feature') {\n    coords =  getCoordinatesDump(gj.geometry);\n  } else if (gj.type == 'GeometryCollection') {\n    coords = gj.geometries.reduce(function(dump,g) {\n      return dump.concat(getCoordinatesDump(g));\n    },[]);\n  } else if (gj.type == 'FeatureCollection') {\n    coords = gj.features.reduce(function(dump,f) {\n      return dump.concat(getCoordinatesDump(f));\n    },[]);\n  }\n  return coords;\n}\n"
+  ]
+}

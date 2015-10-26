@@ -1,0 +1,30 @@
+{
+  "name": "geojson-bbox",
+  "version": "0.0.0",
+  "description": "Calculates extent/bbox for a given valid geojson object.",
+  "main": "geojson-bbox.js",
+  "scripts": {
+    "test": "mocha test/test.js",
+    "build-debug": "browserify geojson-bbox.js --debug --standalone bbox | exorcist dist/geojson-bbox.js.map > dist/geojson-bbox.js",
+    "build-min": "browserify geojson-bbox.js --standalone bbox | uglifyjs -c -m > dist/geojson-bbox.min.js",
+    "build": "npm run build-debug && npm run build-min"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geosquare/geojson-bbox"
+  },
+  "keywords": ["geojson", "extent", "bbox", "bounds", "maps", "geo", "geospatial"],
+  "author": "Gagan Bansal <gaganbansal123@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geosquare/geojson-bbox/issues"
+  },
+  "homepage": "https://github.com/geosquare/geojson-bbox",
+  "devDependencies": {
+    "browserify": "^8.1.1",
+    "chai": "^1.10.0",
+    "exorcist": "^0.1.6",
+    "mocha": "^2.1.0",
+    "uglify-js": "^2.4.16"
+  }
+}
