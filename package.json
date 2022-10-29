@@ -13,7 +13,15 @@
     "type": "git",
     "url": "https://github.com/geosquare/geojson-bbox"
   },
-  "keywords": ["geojson", "extent", "bbox", "bounds", "maps", "geo", "geospatial"],
+  "keywords": [
+    "geojson",
+    "extent",
+    "bbox",
+    "bounds",
+    "maps",
+    "geo",
+    "geospatial"
+  ],
   "author": "Gagan Bansal <gaganbansal123@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -21,10 +29,10 @@
   },
   "homepage": "https://github.com/geosquare/geojson-bbox",
   "devDependencies": {
-    "browserify": "^8.1.1",
+    "browserify": "^17.0.0",
     "chai": "^1.10.0",
-    "exorcist": "^0.1.6",
-    "mocha": "^2.1.0",
+    "exorcist": "^2.0.0",
+    "mocha": "^10.1.0",
     "uglify-js": "^2.4.16"
   }
 }
