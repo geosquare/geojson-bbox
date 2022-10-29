@@ -1,6 +1,6 @@
 {
   "name": "geojson-bbox",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Calculates extent/bbox for a given valid geojson object.",
   "main": "geojson-bbox.js",
   "scripts": {
